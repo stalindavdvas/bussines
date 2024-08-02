@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  postgres_clients:
+    image: postgres:13
+    container_name: postgres_clients
+    environment:
+      POSTGRES_USER: cliente
+      POSTGRES_PASSWORD: cliente
+      POSTGRES_DB: clientes
+    ports:
+      - "5436:5432"
+    volumes:
+      - postgres_clients_data:/var/lib/postgresql/data
+    networks:
+      - db_network
+
+  postgres_sales:
+    image: postgres:13
+    container_name: postgres_sales
+    environment:
+      POSTGRES_USER: venta
+      POSTGRES_PASSWORD: venta
+      POSTGRES_DB: ventas
+    ports:
+      - "5435:5432"
+    volumes:
+      - postgres_sales_data:/var/lib/postgresql/data
+    networks:
+      - db_network
+
+  postgres_warehouse:
+    image: postgres:13
+    container_name: postgres_warehouse
+    environment:
+      POSTGRES_USER: dw
+      POSTGRES_PASSWORD: dw
+      POSTGRES_DB: warehouse
+    ports:
+      - "5437:5432"
+    volumes:
+      - postgres_warehouse_data:/var/lib/postgresql/data
+    networks:
+      - db_network
+
+networks:
+  db_network:
+
+volumes:
+  postgres_clients_data:
+  postgres_sales_data:
+  postgres_warehouse_data:

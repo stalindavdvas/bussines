@@ -1,0 +1,189 @@
+--Script para la base de datos Ventas
+-- Crear tabla productos
+CREATE TABLE productos (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100),
+    precio DECIMAL(10, 2),
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Crear tabla ventas
+CREATE TABLE ventas (
+    id SERIAL PRIMARY KEY,
+    producto_id INTEGER REFERENCES productos(id),
+    cantidad INTEGER,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insertar 25 registros de ejemplo en productos
+INSERT INTO productos (nombre, precio) VALUES
+('Producto A', 10.00),
+('Producto B', 20.00),
+('Producto C', 30.00),
+('Producto D', 40.00),
+('Producto E', 50.00),
+('Producto F', 60.00),
+('Producto G', 70.00),
+('Producto H', 80.00),
+('Producto I', 90.00),
+('Producto J', 100.00),
+('Producto K', 110.00),
+('Producto L', 120.00),
+('Producto M', 130.00),
+('Producto N', 140.00),
+('Producto O', 150.00),
+('Producto P', 160.00),
+('Producto Q', 170.00),
+('Producto R', 180.00),
+('Producto S', 190.00),
+('Producto T', 200.00),
+('Producto U', 210.00),
+('Producto V', 220.00),
+('Producto W', 230.00),
+('Producto X', 240.00),
+('Producto Y', 250.00),
+('Producto Z', 260.00);
+
+-- Insertar 25 registros de ejemplo en ventas
+INSERT INTO ventas (producto_id, cantidad) VALUES
+(1, 2),
+(2, 1),
+(3, 5),
+(4, 3),
+(5, 4),
+(6, 6),
+(7, 2),
+(8, 7),
+(9, 3),
+(10, 8),
+(11, 2),
+(12, 4),
+(13, 1),
+(14, 6),
+(15, 5),
+(16, 7),
+(17, 3),
+(18, 2),
+(19, 8),
+(20, 6),
+(21, 7),
+(22, 3),
+(23, 4),
+(24, 1),
+(25, 2);
+
+-- Crear tabla transacciones en la base de datos ventas
+CREATE TABLE transacciones (
+    id SERIAL PRIMARY KEY,
+    cliente_id INTEGER,
+    producto_id INTEGER REFERENCES productos(id),
+    cantidad INTEGER,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+INSERT INTO transacciones (cliente_id, producto_id, cantidad, fecha) VALUES
+(1, 10, 3, '2024-08-01 10:00:00'),
+(2, 11, 1, '2024-08-01 10:05:00'),
+(3, 12, 2, '2024-08-01 10:10:00'),
+(4, 13, 5, '2024-08-01 10:15:00'),
+(5, 14, 1, '2024-08-01 10:20:00'),
+(1, 15, 4, '2024-08-01 10:25:00'),
+(2, 16, 2, '2024-08-01 10:30:00'),
+(3, 17, 3, '2024-08-01 10:35:00'),
+(4, 18, 6, '2024-08-01 10:40:00'),
+(5, 19, 1, '2024-08-01 10:45:00'),
+(1, 20, 2, '2024-08-01 10:50:00'),
+(2, 21, 4, '2024-08-01 10:55:00'),
+(3, 22, 3, '2024-08-01 11:00:00'),
+(4, 23, 1, '2024-08-01 11:05:00'),
+(5, 24, 2, '2024-08-01 11:10:00'),
+(1, 25, 5, '2024-08-01 11:15:00'),
+(2, 10, 1, '2024-08-01 11:20:00'),
+(3, 11, 3, '2024-08-01 11:25:00'),
+(4, 12, 2, '2024-08-01 11:30:00'),
+(5, 13, 4, '2024-08-01 11:35:00'),
+(1, 14, 2, '2024-08-01 11:40:00'),
+(2, 15, 5, '2024-08-01 11:45:00'),
+(3, 16, 1, '2024-08-01 11:50:00'),
+(4, 17, 3, '2024-08-01 11:55:00'),
+(5, 18, 2, '2024-08-01 12:00:00'),
+(1, 19, 6, '2024-08-01 12:05:00'),
+(2, 20, 3, '2024-08-01 12:10:00');
+
+INSERT INTO transacciones (cliente_id, producto_id, cantidad, fecha) VALUES
+(1, 2, 3, '2024-08-01 10:00:00'),
+(2, 3, 1, '2024-08-01 10:05:00'),
+(3, 1, 2, '2024-08-01 10:10:00'),
+(4, 13, 5, '2024-08-01 10:15:00'),
+(5, 17, 1, '2024-08-01 10:20:00'),
+(1, 19, 4, '2024-08-01 10:25:00');
+
+
+INSERT INTO transacciones (cliente_id, producto_id, cantidad, fecha) VALUES
+(1, 2, 10, '2024-08-01 10:00:00')
+
+INSERT INTO transacciones (cliente_id, producto_id, cantidad, fecha) VALUES
+(2, 3, 1000, '2024-08-01 10:00:00')
+
+--===========================Scripts para Clientes==========================================
+-- Crear tabla clientes
+CREATE TABLE clientes (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100),
+    email VARCHAR(100),
+    telefono VARCHAR(15),
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insertar 25 registros de ejemplo
+INSERT INTO clientes (nombre, email, telefono) VALUES
+('Juan Pérez', 'juan.perez@example.com', '123456789'),
+('Ana González', 'ana.gonzalez@example.com', '987654321'),
+('Carlos Fernández', 'carlos.fernandez@example.com', '555555555'),
+('Laura Martínez', 'laura.martinez@example.com', '666666666'),
+('Pedro Rodríguez', 'pedro.rodriguez@example.com', '777777777'),
+('Marta López', 'marta.lopez@example.com', '888888888'),
+('Luis Morales', 'luis.morales@example.com', '999999999'),
+('Sofía Fernández', 'sofia.fernandez@example.com', '111111111'),
+('Jorge Gómez', 'jorge.gomez@example.com', '222222222'),
+('Isabel Romero', 'isabel.romero@example.com', '333333333'),
+('Ricardo Vargas', 'ricardo.vargas@example.com', '444444444'),
+('Elena Castro', 'elena.castro@example.com', '555555556'),
+('Oscar Ruiz', 'oscar.ruiz@example.com', '666666667'),
+('Patricia Jiménez', 'patricia.jimenez@example.com', '777777778'),
+('Fernando Moreno', 'fernando.moreno@example.com', '888888889'),
+('Cristina Morales', 'cristina.morales@example.com', '999999998'),
+('Mario Jiménez', 'mario.jimenez@example.com', '111111110'),
+('Beatriz Pérez', 'beatriz.perez@example.com', '222222223'),
+('Antonio Sánchez', 'antonio.sanchez@example.com', '333333334'),
+('Silvia López', 'silvia.lopez@example.com', '444444445'),
+('Alberto Rodríguez', 'alberto.rodriguez@example.com', '555555557'),
+('Nuria García', 'nuria.garcia@example.com', '666666668'),
+('Ricardo Hernández', 'ricardo.hernandez@example.com', '777777779'),
+('Paola Fernández', 'paola.fernandez@example.com', '888888880'),
+('Antonio Torres', 'antonio.torres@example.com', '999999999');
+
+--==============================Scripts para datarehouse=============================================
+CREATE TABLE clientes (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100),
+    email VARCHAR(100),
+    telefono VARCHAR(15),
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE productos (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100),
+    precio DECIMAL(10, 2),
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE ventas (
+    id SERIAL PRIMARY KEY,
+    producto_id INTEGER REFERENCES productos(id),
+    cantidad INTEGER,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    cliente_id INTEGER REFERENCES clientes(id)  -- Nueva columna cliente_id
+);
